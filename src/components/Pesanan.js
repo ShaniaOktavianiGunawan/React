@@ -9,6 +9,7 @@ import axios from "axios";
 const Pesanan = () => {
   const [order, setOrder] = useState([]);
   const idUser = localStorage.getItem("id_user");
+  const [total, settotal] = useState(0);
 
   const pesanan = async () => {
     try {
@@ -25,6 +26,18 @@ const Pesanan = () => {
   useEffect(() => {
     pesanan();
   }, [pesanan]);
+
+  const price = [];
+  console.log(price);
+  var count = 0;
+
+  for (var i = 0; i < price.length; i++) {
+    if (price[i] === 1) {
+      count++;
+    }
+  }
+
+  console.log(count);
 
   return (
     <div>
@@ -44,7 +57,7 @@ const Pesanan = () => {
 
       {/* {order &&
         order
-          .filter((order) => order.id_user == idUser)
+          .filter((order) => order.id_user === idUser)
           .map((order, index) => {
             return ( */}
       <div className="table-responsive" style={{ marginTop: "3rem" }}>
@@ -82,18 +95,21 @@ const Pesanan = () => {
             </tr>
           </thead>
 
+          {console.log(order)}
           <tbody>
             {order &&
               order
-                .filter((order) => order.id_user == idUser)
+                .filter(
+                  (order) => order.id_user == idUser && order.produks.length > 0
+                )
                 .map((order, index) => {
                   return (
                     <>
-                      {console.log(order.produks[0])}
                       <tr>
-                        <td>{index}</td>
+                        <td>{index + 1}</td>
                         <td>{order.produks[0]?.menu}</td>
                         <td>{order.produks[0]?.harga}</td>
+                        {price.push(order.produks[0]?.harga)}
                         <td>1</td>
                         <td>{order.produks[0]?.harga}</td>
                         <td>
@@ -107,14 +123,17 @@ const Pesanan = () => {
                 })}
             <tr>
               <td colspan="4">Total Belanja</td>
-              <td>Rp. 500.000</td>
+              <td>{total}</td>
             </tr>
             <tr></tr>
           </tbody>
         </table>
 
         <div style={{ marginTop: "2rem" }}>
-          <Button variant="primary" style={{ marginLeft: "2rem", marginRight: " 2rem" }}>
+          <Button
+            variant="primary"
+            style={{ marginLeft: "2rem", marginRight: " 2rem" }}
+          >
             Lihat Menu
           </Button>
           <Button variant="success">Konfirmasi Pesanan </Button>

@@ -1,7 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import bg from "../images/Background/bg2.jpg";
-import { AutoComplete, Button, Cascader, Checkbox, Col, Form, Input, InputNumber, Row, Select } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Cascader,
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+} from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -51,46 +62,28 @@ const Register = () => {
       console.error(error);
     }
   };
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="62">+62</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult([".com", ".org", ".net"].map((domain) => `${value}${domain}`));
-    }
-  };
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundImage: `url(${bg})` }}>
-      <div style={{ border: "1px solid gray", padding: "2%", width: "70%", borderRadius: "1rem", boxShadow: "1px 2px 9px gray", backgroundColor: "white", opacity: "95%" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundImage: `url(${bg})`,
+      }}
+    >
+      <div
+        style={{
+          border: "1px solid gray",
+          padding: "2%",
+          width: "70%",
+          borderRadius: "1rem",
+          boxShadow: "1px 2px 9px gray",
+          backgroundColor: "white",
+          opacity: "95%",
+        }}
+      >
         <h4 style={{ textAlign: "center" }}>HALAMAN REGISTRASI</h4>
         <Form
           {...formItemLayout}
@@ -174,7 +167,11 @@ const Register = () => {
                   if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error("The two passwords that you entered do not match!"));
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
                 },
               }),
             ]}
